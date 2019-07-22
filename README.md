@@ -27,7 +27,7 @@ bds-bch is one of the independent modules in open source project of block chain 
 2. Run full node and support sending messages to Kafka
 
 ```
-   /usr/local/bin/bitcoind -kafka -kafkaproxyhost=<kafka 代理的ip地址> -kafkaproxyport=<kafka 代理的访问端口，默认是 8082> -kafkatopic=btc -datadir=<数据目录> -rpcuser=<账号> -rpcpassword=<密码>
+   /usr/local/bin/bitcoind -kafka -kafkaproxyhost=<kafka 代理的ip地址> -kafkaproxyport=<kafka 代理的访问端口，默认是 8082> -kafkatopic=bch -datadir=<数据目录> -rpcuser=<账号> -rpcpassword=<密码>
 ```
 
 ### Install confluent and kafka
@@ -70,7 +70,7 @@ See [Grafana Official](https://grafana.com/)
 2. Sendblock and sendbatchblock are newly added as RPC interfaces to trigger full node to send data for a specific block.
 
 ### Source Code Change History
-[bds-btc](./CHANGE_HISTORY.md)
+[bds-bch](./CHANGE_HISTORY.md)
 
 ## Contributing
 [Contributing guide](./CONTRIBUTING.md)
