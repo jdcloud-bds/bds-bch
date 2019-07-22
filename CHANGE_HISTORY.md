@@ -10,7 +10,7 @@ Add new methods
 UniValue myBlockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDetails);
 
 //get vout value
-UniValue myValueFromAmount(const CAmount& amount);
+UniValue myValueFromAmount(const Amount& amount);
 
 //get block by height
 UniValue myGetBlock(const int height);
