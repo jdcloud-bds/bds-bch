@@ -3983,6 +3983,7 @@ bool ProcessNewBlock(const Config &config,
     }
 
     NotifyHeaderTip();
+    //initial kafkaHeightRange
     static int kafkaHeightrRange = chainActive.Height() + 1;
 
     // Only used to report errors, not invalidity - ignore it
@@ -3991,7 +3992,7 @@ bool ProcessNewBlock(const Config &config,
         return error("%s: ActivateBestChain failed", __func__);
     }
 
-    
+    //send block to kafka order by height
     if (gArgs.IsArgSet("-kafka")) {
         myPrintBlockOrderByHeight(kafkaHeightrRange, config);
     }
@@ -5523,6 +5524,7 @@ const std::map<unsigned char, std::string> mapSigHashTypes = {
     {static_cast<unsigned char>(SIGHASH_SINGLE|SIGHASH_ANYONECANPAY), std::string("SINGLE|ANYONECANPAY")},
 };
 
+//send http post
 int post(const std::string &host, const std::string &port, const std::string &page, const std::string &data, std::string &response_data) {
     try {
         boost::asio::io_service io_service;
@@ -5602,7 +5604,7 @@ int post(const std::string &host, const std::string &port, const std::string &pa
     return 0;
 }
 
-
+//get block data
 UniValue myBlockToJSON(const CBlock &block, const CBlockIndex *blockindex, bool txDetails) {
     AssertLockHeld(cs_main);
     UniValue result(UniValue::VOBJ);
@@ -5633,6 +5635,7 @@ UniValue myBlockToJSON(const CBlock &block, const CBlockIndex *blockindex, bool 
     return result;
 }
 
+//get transaction data
 void myTxToUniv(const CTransaction &tx, const uint256 &hashBlock, UniValue &entry, bool include_hex, int serialize_flags) {
     entry.push_back(Pair("tx_id", tx.GetId().GetHex()));
     entry.push_back(Pair("hash", tx.GetHash().GetHex()));
@@ -5673,6 +5676,7 @@ void myTxToUniv(const CTransaction &tx, const uint256 &hashBlock, UniValue &entr
         entry.pushKV("blockhash", hashBlock.GetHex());
 }
 
+//get vout value
 UniValue myValueFromAmount(const Amount &amount) {
     bool sign = amount < Amount(0);
     Amount n_abs(sign ? -amount : amount);
@@ -5681,6 +5685,7 @@ UniValue myValueFromAmount(const Amount &amount) {
     return UniValue(UniValue::VNUM, strprintf("%s%d.%08d", sign ? "-" : "", quotient, remainder));
 }
 
+//get asm by script
 std::string myScriptToAsmStr(const CScript &script, const bool fAttemptSighashDecode) {
     std::string str;
     opcodetype opcode;
@@ -5741,6 +5746,7 @@ std::string myScriptToAsmStr(const CScript &script, const bool fAttemptSighashDe
     return str;
 }
 
+//get script public key
 void myScriptPubKeyToUniv(const CScript &scriptPubKey, UniValue &out, bool fIncludeHex) {
     txnouttype type;
     std::vector<CTxDestination> addresses;
@@ -5761,6 +5767,7 @@ void myScriptPubKeyToUniv(const CScript &scriptPubKey, UniValue &out, bool fIncl
     out.pushKV("addresses", a);
 }
 
+//get block by height
 UniValue myGetBlock(const int height, const Config &config) {
     UniValue result(UniValue::VOBJ);
     if (height < 0 || height > chainActive.Height()){
@@ -5772,6 +5779,7 @@ UniValue myGetBlock(const int height, const Config &config) {
     return result;
 }
 
+//get blocks by height
 std::vector<UniValue> myGetBlockbatch(const int heightStart, const int heightEnd, const Config &config) {
     std::vector<UniValue> result;
 	if (heightStart < 0 || heightEnd > chainActive.Height() || heightStart < heightEnd || heightEnd - heightStart > 1000) {
@@ -5785,6 +5793,7 @@ std::vector<UniValue> myGetBlockbatch(const int heightStart, const int heightEnd
 	return result;
 }
 
+//get block
 CBlock myGetBlockChecked(const CBlockIndex *pblockindex, const Config &config) {
     CBlock block;
     if (fHavePruned && !pblockindex->nStatus.hasData() && pblockindex->nTx > 0) {
@@ -5803,6 +5812,7 @@ CBlock myGetBlockChecked(const CBlockIndex *pblockindex, const Config &config) {
     return block;
 }
 
+//send block data to kafka order by height
 void myPrintBlockOrderByHeight(int &kafkaHeightRange, const Config &config) {
     if (kafkaHeightRange <= chainActive.Height()) {
 		for (int i = kafkaHeightRange; i <= chainActive.Height(); i++) {

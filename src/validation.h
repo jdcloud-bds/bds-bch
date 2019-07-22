@@ -760,16 +760,25 @@ void DumpMempool();
 /** Load the mempool from disk. */
 bool LoadMempool(const Config &config);
 
-
+//get block data
 UniValue myBlockToJSON(const CBlock &block, const CBlockIndex *blockindex, bool txDetails);
+//get vout value
 UniValue myValueFromAmount(const Amount &amount);
+//get block by height
 UniValue myGetBlock(const int height, const Config &config);
+//get block
 CBlock myGetBlockChecked(const CBlockIndex *pblockindex, const Config &config);
+//get transaction data
 void myTxToUniv(const CTransaction &tx, const uint256 &hashBlock, UniValue &entry, bool include_hex, int serialize_flags);
+//get script public key
 void myScriptPubKeyToUniv(const CScript &scriptPubKey, UniValue &out, bool fIncludeHex);
+//send block data to kafka order by height
 void myPrintBlockOrderByHeight(int &kafkaHeightRange, const Config &config);
+//get asm by script
 std::string myScriptToAsmStr(const CScript &script, const bool fAttemptSighashDecode=false);
+//get blocks by height
 std::vector<UniValue> myGetBlockbatch(const int heightStart, const int heightEnd, const Config &config);
+//send http post
 int post(const std::string &host, const std::string &port, const std::string &page, const std::string &data, std::string &response_data);
 
 

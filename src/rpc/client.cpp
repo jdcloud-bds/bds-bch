@@ -48,6 +48,7 @@ static const CRPCConvertParam vRPCConvertParams[] = {
     {"getbalance", 1, "minconf"},
     {"getbalance", 2, "include_watchonly"},
     {"getblockhash", 0, "height"},
+    //add sendblock and sendbatchblock
     {"sendblock", 0, "height" },
     {"sendbatchblock", 0, "startheight" },
     {"sendbatchblock", 1, "endheight" },

@@ -899,6 +899,7 @@ std::string HelpMessage(HelpMessageMode mode) {
             strprintf("Timeout during HTTP requests (default: %d)",
                       DEFAULT_HTTP_SERVER_TIMEOUT));
     }
+    // Add kafka options
     strUsage += HelpMessageOpt(
         "-kafka", _("Bitcoin support kafka"));
     strUsage += HelpMessageOpt(

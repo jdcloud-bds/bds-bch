@@ -679,6 +679,7 @@ UniValue getblockhash(const Config &config, const JSONRPCRequest &request) {
     return pblockindex->GetBlockHash().GetHex();
 }
 
+//rpc : send block to kafka by height
 static UniValue sendblock(const Config &config, const JSONRPCRequest &request) {
     if (request.fHelp || request.params.size() != 1)
         throw std::runtime_error(
@@ -714,6 +715,7 @@ static UniValue sendblock(const Config &config, const JSONRPCRequest &request) {
 	return result;
 }
 
+//rpc : send batch blocks to kafka by height
 static UniValue sendbatchblock(const Config &config, const JSONRPCRequest &request) {
     if (request.fHelp || request.params.size() != 2)
         throw std::runtime_error(
@@ -1759,6 +1761,7 @@ static const ContextFreeRPCCommand commands[] = {
     { "blockchain",         "pruneblockchain",        pruneblockchain,        true,  {"height"} },
     { "blockchain",         "verifychain",            verifychain,            true,  {"checklevel","nblocks"} },
     { "blockchain",         "preciousblock",          preciousblock,          true,  {"blockhash"} },
+    //add sendblock and sendbatch block
     { "blockchain",         "sendblock",              sendblock,              true,  {"height"} },
     { "blockchain",         "sendbatchblock",         sendbatchblock,         true,  {"startheight", "endheight"} },
 
