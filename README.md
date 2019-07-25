@@ -27,7 +27,9 @@ bds-bch is one of the independent modules in open source project of block chain 
 2. Run full node and support sending messages to Kafka
 
 ```
-   /usr/local/bin/bitcoind -kafka -kafkaproxyhost=<kafka 代理的ip地址> -kafkaproxyport=<kafka 代理的访问端口，默认是 8082> -kafkatopic=bch -datadir=<数据目录> -rpcuser=<账号> -rpcpassword=<密码>
+    # log file position: <data_dir>/debug.log
+
+   /usr/local/bin/bitcoind -kafka -kafkaproxyhost=<kafka proxy host> -kafkaproxyport=<kafka proxy port，default 8082> -kafkatopic=bch -datadir=<data directory> -rpcuser=<user> -rpcpassword=<password>
 ```
 
 ### Install confluent and kafka
