@@ -2,7 +2,7 @@
 ## 介绍
 bds-bch 是开源项目区块链数据服务（BDS）的其中一个独立模块 - 提供全节点服务。
 
-*bds-btc* 基于 [Bitcoin-ABC/bitcoin-abc](https://github.com/Bitcoin-ABC/bitcoin-abc) 的 v0.18.1 版本进行二次开发，支持直接将新增的区块数据往消息中间件服务 kafka 发送，方便上游的服务来订阅消费。
+*bds-bch* 基于 [Bitcoin-ABC/bitcoin-abc](https://github.com/Bitcoin-ABC/bitcoin-abc) 的 v0.18.1 版本进行二次开发，支持直接将新增的区块数据往消息中间件服务 kafka 发送，方便上游的服务来订阅消费。
 
 ## 架构
 ![架构](./doc/bds-architecture.jpg)
@@ -71,7 +71,7 @@ bds-bch 是开源项目区块链数据服务（BDS）的其中一个独立模块
 2. sendblock 和 sendbatchblock 是新添加的两个 RPC 接口，用于触发全节点发送特定块的数据。
 
 ### 源代码修改历史记录
-[bds-btc](./CHANGE_HISTORY.md)
+[bds-bch](./CHANGE_HISTORY.md)
 
 ## 贡献
 [贡献指南](./CONTRIBUTING.md)
