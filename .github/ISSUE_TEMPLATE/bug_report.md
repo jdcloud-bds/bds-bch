@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a bug when run the bds-btc 
+about: Report a bug when run the bds-bch 
 ---
 (NOTE: Please use this template while reporting a bug and provide as much info as possible)
 
